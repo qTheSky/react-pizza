@@ -18,7 +18,8 @@ export const PizzaBlock = ({title, price, imageUrl, sizes, types}) => {
 								<ul>
 										{
 												types.map(typeId =>
-														<li onClick={() => setActiveType(typeId)}
+														<li key={typeId}
+														    onClick={() => setActiveType(typeId)}
 														    className={activeType === typeId ? 'active' : ''}>
 																{typeNames[typeId]}
 														</li>)
@@ -27,7 +28,8 @@ export const PizzaBlock = ({title, price, imageUrl, sizes, types}) => {
 								<ul>
 										{
 												sizes.map((size, i) =>
-														<li className={activeSize === i ? 'active' : ''}
+														<li key={i}
+														    className={activeSize === i ? 'active' : ''}
 														    onClick={() => setActiveSize(i)}>
 																{size} см.
 														</li>)
