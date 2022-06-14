@@ -14,10 +14,11 @@ export const Home = () => {
 								setItems(arr)
 								setIsloading(false)
 						})
+				window.scrollTo(0,0)
 		}, [])
 
 		return (
-				<>
+				<div className="container">
 						<div className="content__top">
 								<Categories/>
 								<Sort/>
@@ -30,6 +31,6 @@ export const Home = () => {
 												: items.map(obj => <PizzaBlock key={obj.id} {...obj}/>)
 								}
 						</div>
-				</>
+				</div>
 		);
 };
