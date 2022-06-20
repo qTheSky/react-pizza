@@ -6,8 +6,10 @@ import {Sort} from '../components/Sort';
 import {Skeleton} from '../components/Pizzablock/Skeleton';
 import {PizzaBlock} from '../components/Pizzablock/PizzaBlock';
 import {Pagination} from '../components/Pagination/Pagination';
+import {SearchContext} from '../App';
 
-export const Home = ({searchValue}) => {
+export const Home = () => {
+		const { searchValue } = React.useContext(SearchContext)
 		const [items, setItems] = React.useState([])
 		const [isLoading, setIsloading] = React.useState(true)
 		const [categoryId, setCategoryId] = React.useState(0)
