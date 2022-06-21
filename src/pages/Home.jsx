@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 
-import { selectFilter } from '../redux/filter/selectors';
+import { selectFilter } from '../redux/selectors';
 import { setCategoryId, setCurrentPage, setFilters } from '../redux/slices/filterSlice';
 import axios from 'axios';
 import { SearchContext } from '../App';
@@ -48,7 +48,6 @@ export const Home = () => {
 						)
 						.then((res) => {
 								setItems(res.data);
-								console.log(res.data)
 								setIsLoading(false);
 						});
 		};
@@ -71,7 +70,6 @@ export const Home = () => {
 		React.useEffect(() => {
 				if (window.location.search) {
 						const params = qs.parse(window.location.search.substring(1));
-
 						const sort = sortList.find((obj) => obj.sortProperty === params.sortProperty);
 
 						dispatch(
