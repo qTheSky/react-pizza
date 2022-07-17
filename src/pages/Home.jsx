@@ -4,28 +4,25 @@ import {useSelector, useDispatch} from 'react-redux';
 import {useNavigate} from 'react-router-dom';
 
 
-import {selectFilter} from '../redux/selectors';
-import {setCategoryId, setCurrentPage, setFilters} from '../redux/slices/filterSlice';
-import {SearchContext} from '../App';
+import {selectFilter, setCategoryId, setCurrentPage, setFilters} from '../redux/slices/filterSlice';
 import {Sort, sortList} from '../components/Sort';
 import {PizzaBlock} from '../components/Pizzablock/PizzaBlock';
 import {Categories} from '../components/Categories';
 import {Pagination} from '../components/Pagination/Pagination';
 import {Skeleton} from '../components/Pizzablock/Skeleton';
-import {fetchPizzas} from '../redux/slices/pizzaSlice';
+import {fetchPizzas, selectPizzaData} from '../redux/slices/pizzaSlice';
 
 export const Home = () => {
 		const navigate = useNavigate();
 		const dispatch = useDispatch();
 		const isMounted = React.useRef(false);
-		const {categoryId, sort, currentPage} = useSelector(selectFilter);
-		const {items, status} = useSelector(state => state.pizza);
+		const {categoryId, sort, currentPage,searchValue} = useSelector(selectFilter);
+		const {items, status} = useSelector(selectPizzaData);
 
-		const {searchValue} = React.useContext(SearchContext);
 
-		const onChangeCategory = React.useCallback((idx) => {
-				dispatch(setCategoryId(idx));
-		}, []);
+		const onChangeCategory = (id) => {
+				dispatch(setCategoryId(id))
+		}
 
 
 		const onChangePage = (page) => {
@@ -101,7 +98,7 @@ export const Home = () => {
 						<h2 className="content__title">Все пиццы</h2>
 						{
 								status === 'error'
-										? <div className='content__error-info'>
+										? <div className="content__error-info">
 												<h2>Произошла ошибка :(</h2>
 												<p>К сожалению не удалось удалить питсы. Попробуйте повторить попытку позже.</p>
 										</div>
