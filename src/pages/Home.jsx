@@ -1,7 +1,7 @@
 import React from 'react';
 import qs from 'qs';
 import {useSelector, useDispatch} from 'react-redux';
-import {useNavigate} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 
 
 import {selectFilter, setCategoryId, setCurrentPage, setFilters} from '../redux/slices/filterSlice';
@@ -16,7 +16,7 @@ export const Home = () => {
 		const navigate = useNavigate();
 		const dispatch = useDispatch();
 		const isMounted = React.useRef(false);
-		const {categoryId, sort, currentPage,searchValue} = useSelector(selectFilter);
+		const {categoryId, sort, currentPage, searchValue} = useSelector(selectFilter);
 		const {items, status} = useSelector(selectPizzaData);
 
 
@@ -85,7 +85,7 @@ export const Home = () => {
 				getPizzas();
 		}, [categoryId, sort.sortProperty, searchValue, currentPage]);
 
-		const pizzas = items.map((obj) => <PizzaBlock key={obj.id} {...obj} />);
+		const pizzas = items.map((obj) => <Link to={`/pizza/${obj.id}`} key={obj.id}><PizzaBlock  {...obj} /></Link>)
 
 		const skeletons = [...new Array(6)].map((_, index) => <Skeleton key={index}/>);
 
